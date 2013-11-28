@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 08 nov 2013 om 12:37
+-- Genereertijd: 28 nov 2013 om 14:32
 -- Serverversie: 5.6.12-log
 -- PHP-versie: 5.4.12
 
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databank: `am1b`
+-- Databank: `am1b-fotosjaak`
 --
-CREATE DATABASE IF NOT EXISTS `am1b` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `am1b`;
+CREATE DATABASE IF NOT EXISTS `am1b-fotosjaak` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `am1b-fotosjaak`;
 
 -- --------------------------------------------------------
 
@@ -48,6 +48,43 @@ INSERT INTO `faq` (`id`, `question_english`, `question_dutch`, `answer_english`,
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `login`
+--
+
+CREATE TABLE IF NOT EXISTS `login` (
+  `login_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(12) NOT NULL,
+  `userrole` enum('customer','administrator','root','photographer','developer') NOT NULL,
+  `isactivated` enum('yes','no') NOT NULL DEFAULT 'no',
+  `registerdate` datetime NOT NULL,
+  PRIMARY KEY (`login_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `firstname` varchar(200) NOT NULL,
+  `infix` varchar(20) NOT NULL,
+  `surname` varchar(300) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `addressnumber` varchar(12) NOT NULL,
+  `city` varchar(300) NOT NULL,
+  `zipcode` varchar(6) NOT NULL,
+  `country` varchar(300) NOT NULL,
+  `phonenumber` varchar(10) NOT NULL,
+  `mobilephonenumber` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `users`
 --
 
@@ -68,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `favo_game` varchar(300) NOT NULL,
   `userrole` enum('customer','admin','root') NOT NULL DEFAULT 'customer',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `users`
