@@ -5,7 +5,7 @@
 	class LoginClass
 	{
 		//Fields
-		private $login_id;
+		public $login_id;
 		private $email;
 		private $password;
 		private $userrole;
@@ -36,25 +36,23 @@
 			while ($row = mysql_fetch_array($result))
 			{
 				//Maak een nieuw LoginClass-object aan per while ronde	
-				$object = LoginClass();
+				$object = new LoginClass();
 				
 				//Vul de velden van het LoginClass-object met de gevonden record-
 				//waarden uit de tabel
-				$this->login_id	= $row['login_id'];
-				$this->email	= $row['email'];
-				$this->password	= $row['password'];
-				$this->userrole = $row['userrole'];
+				$this->login_id		= $row['login_id'];
+				$this->email		= $row['email'];
+				$this->password		= $row['password'];
+				$this->userrole 	= $row['userrole'];
 				$this->isactivated	= $row['isactivated'];
 				$this->registerdate	= $row['registerdate'];
 				
-				
-			}
-			
-			
-		}
-		
+				//Stop het $object gemaakt van de LoginClass
+				//in het objectarray genaamd
+				//$object_array
+				$object_array[] = $object;				
+			}			
+			return $object_array;
+		}		
 	}
-
-
 ?>
-Dit is de loginclasspagina

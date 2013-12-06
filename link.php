@@ -4,11 +4,9 @@
 		<a href='./index.php?content=homepage'>homepage</a>
 	</li>
 	<li>
-		<a href='./index.php?content=class/MySqlDatabaseClass'>test db-class</a>
+		<a href='./index.php?content=loginClass-Test'>loginClass-test</a>
 	</li>
-	<li>
-		<a href='./index.php?content=class/LoginClass'>test login-class</a>
-	</li>
+	
 	<?php
 		if (isset($_SESSION['userrole']))
 		{
