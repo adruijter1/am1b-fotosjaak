@@ -5,12 +5,21 @@
 	class LoginClass
 	{
 		//Fields
-		public $login_id;
+		private $login_id;
 		private $email;
 		private $password;
 		private $userrole;
 		private $isactivated;
 		private $registerdate;
+		
+		//Properties
+		//getters voor alle fields
+		public function getLogin_id() {	return $this->login_id;	}
+		public function getEmail() { return $this->email; }
+		public function getPassword() { return $this->password; }
+		public function getUserrole() { return $this->userrole; }
+		public function getIsactivated() { return $this->isactivated; }
+		public function getRegisterdate() { return $this->registerdate; }
 		
 		// De constructor van de LoginClass
 		public function __constructor()
@@ -19,7 +28,7 @@
 		}
 		
 		// Method find_by_sql
-		public function find_by_sql($sql)
+		public static function find_by_sql($sql)
 		{
 			// global zorgt ervoor dat $database ook binnen de haakjes
 			// van de find_by_sql method bekent is.	
@@ -40,12 +49,12 @@
 				
 				//Vul de velden van het LoginClass-object met de gevonden record-
 				//waarden uit de tabel
-				$this->login_id		= $row['login_id'];
-				$this->email		= $row['email'];
-				$this->password		= $row['password'];
-				$this->userrole 	= $row['userrole'];
-				$this->isactivated	= $row['isactivated'];
-				$this->registerdate	= $row['registerdate'];
+				$object->login_id		= $row['login_id'];
+				$object->email			= $row['email'];
+				$object->password		= $row['password'];
+				$object->userrole 		= $row['userrole'];
+				$object->isactivated	= $row['isactivated'];
+				$object->registerdate	= $row['registerdate'];
 				
 				//Stop het $object gemaakt van de LoginClass
 				//in het objectarray genaamd
@@ -54,5 +63,14 @@
 			}			
 			return $object_array;
 		}		
-	}
+	
+		public static function find_all_records()
+		{
+			$query = "SELECT * FROM `login`";
+			
+			//static methods worden aangeroepen met een dubbele dubbele punt
+			//double colon
+			return self::find_by_sql($query);
+		}
+}
 ?>

@@ -2,17 +2,17 @@
 <?php
 	//Voeg het bestand LoginClass.php in
 	require_once("class/LoginClass.php");
+		
+	$result = LoginClass::find_all_records();
 	
-	$login = new LoginClass();
-	
-	$query = "SELECT * FROM `login`";
-	
-	$result = $login->find_by_sql($query);
-	
-	//var_dump($result);
 	
 	foreach ($result as $value)
 	{
-		echo $value->login_id."<br>";		
+		echo $value->getLogin_id()." | ".
+			 $value->getEmail()." | ".
+			 $value->getPassword()." | ".
+			 $value->getUserrole()." | ".
+			 $value->getIsactivated()." | ".
+			 $value->getRegisterdate()."<br>";		
 	}
 ?>
