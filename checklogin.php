@@ -1,21 +1,32 @@
 <?php
+	require_once("class/LoginClass.php");
+
+	// Check of de loginformulier velden wel zijn ingevuld
 	if (!empty($_POST['email']) && !empty($_POST['password']))
 	{
-		//Check in de database of beide ingevoerde waarden bestaan
-		include("connect_db.php");
-		$query = "SELECT *
-				  FROM `users`
-				  WHERE `email` = '".$_POST['email']."'
-				  AND	`password` = '".$_POST['password']."'";
-		$result = mysql_query($query, $db);
-		
-		if (mysql_num_rows($result) > 0)
+		/* Check in de database of beide ingevoerde waarden in
+		 * het loginformulier wel bestaan in de login tabel
+		 * Tussen de haakjes van het onderstaande if-statement
+		 * moet true of false komen te staan. We schrijven daarvoor
+		 * een method in de LoginClass class. 
+		 * Een static method uit een class kan worden aangeroepen
+		 * met: de naam van de class gevolgd door dan een
+		 * dubbele dubbele punt gevold door de naam van de method.
+		 */
+		if (LoginClass::check_if_email_password_exists($_POST['email'],
+													   $_POST['password']))
 		{
-			$record = mysql_fetch_array($result);
-			$_SESSION['id'] = $record['id'];
-			$_SESSION['userrole'] = $record['userrole'];
+			/* Vind de logingegevens van de user die inlogt. Je krijgt
+			 * een loginClass object terug. En je kan dus de properties
+			 * getLogin() en getUserrole() opvragen.		 * 
+			 */	
+			$user = LoginClass::find_login_user($_POST['email'],
+												$_POST['password']);
+			
+			$_SESSION['id']			= $user->getLogin_id();
+			$_SESSION['userrole']	= $user->getUserrole();
 						
-			switch ($record['userrole'])
+			switch ($_SESSION['userrole'])
 			{
 				case 'customer':
 					header("location:index.php?content=customer_homepage");

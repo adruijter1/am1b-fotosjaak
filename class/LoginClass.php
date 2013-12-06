@@ -68,9 +68,60 @@
 		{
 			$query = "SELECT * FROM `login`";
 			
-			//static methods worden aangeroepen met een dubbele dubbele punt
-			//double colon
+			/* static methods worden aangeroepen met een 
+			 * dubbele dubbele punt (Engels: double colon)
+			 */
 			return self::find_by_sql($query);
+		}
+
+		public static function check_if_email_password_exists($email,
+															  $password)
+		{
+			/* Als we het $database object van de class MySqlDatabaseClass
+			 * willen gebruiken binnen de method check_if_email_exists, dan
+			 * moeten we voor $database global zetten. PHP weet dan dat we
+			 * $database bedoelen die bovenaan met require-once is geinclude 
+			 */
+			global $database;
+			
+			/* Dit is query die records selecteert met het ingevulde
+			 * emailadres en password 
+			 */
+			$query = "SELECT	*
+					  FROM		`login`
+					  WHERE		`email`		= '".$email."'
+					  AND		`password`	= '".$password."'";
+			
+			/* De query wordt afgevuurd op de database 
+			 */
+			$result = $database->fire_query($query);
+			
+			/* mysql_num_rows telt het aantal gevonden records van
+			 * de resource $result 
+			 */
+			return mysql_num_rows($result);
+		}
+
+		public static function find_login_user($email, $password)
+		{
+			/* gebruik het $database object dat wordt toegevoegd met 
+			 * require-once
+			 */	
+			global $database;
+			
+			/* Dit is query die alle records selecteert met het ingevulde
+			 * emailadres en password afkomstig van het formulier
+			 */
+			$query = "SELECT	*
+					  FROM		`login`
+					  WHERE		`email`		= '".$email."'
+					  AND		`password`	= '".$password."'";
+			
+			/* Met array_shift haal je het ene record uit het array
+			 * en geef je dus een LoginClass object terug 
+			 */
+			$record_array = self::find_by_sql($query);
+			return array_shift($record_array);
 		}
 }
 ?>
