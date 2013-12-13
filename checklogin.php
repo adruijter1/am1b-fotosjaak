@@ -1,5 +1,7 @@
 <?php
+	require_once("class/SessionClass.php");
 	require_once("class/LoginClass.php");
+	
 
 	// Check of de loginformulier velden wel zijn ingevuld
 	if (!empty($_POST['email']) && !empty($_POST['password']))
@@ -18,13 +20,13 @@
 		{
 			/* Vind de logingegevens van de user die inlogt. Je krijgt
 			 * een loginClass object terug. En je kan dus de properties
-			 * getLogin() en getUserrole() opvragen.		 * 
+			 * getLogin() en getUserrole() opvragen. Geef het loginClass
+			 * object mee aan de login method uit het $session object. Het
+			 * $session object wordt gemaakt in het bestand SessionClass.php 
 			 */	
-			$user = LoginClass::find_login_user($_POST['email'],
-												$_POST['password']);
-			
-			$_SESSION['id']			= $user->getLogin_id();
-			$_SESSION['userrole']	= $user->getUserrole();
+					
+			$session->login(LoginClass::find_login_user($_POST['email'],
+														$_POST['password']));
 						
 			switch ($_SESSION['userrole'])
 			{
@@ -39,6 +41,9 @@
 					break;
 				case 'developer':
 					header("location:index.php?content=developer_homepage");
+					break;
+				case 'photographer':
+					header("location:index.php?content=photographer_homepage");
 					break;			
 			}		
 		}
