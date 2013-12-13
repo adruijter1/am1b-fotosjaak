@@ -24,27 +24,38 @@
 			 * object mee aan de login method uit het $session object. Het
 			 * $session object wordt gemaakt in het bestand SessionClass.php 
 			 */	
+				
+			if (LoginClass::check_if_account_is_activated($_POST['email'],
+														  $_POST['password']))
+			{	
 					
-			$session->login(LoginClass::find_login_user($_POST['email'],
-														$_POST['password']));
-						
-			switch ($_SESSION['userrole'])
+				$session->login(LoginClass::find_login_user($_POST['email'],
+															$_POST['password']));
+							
+				switch ($_SESSION['userrole'])
+				{
+					case 'customer':
+						header("location:index.php?content=customer_homepage");
+						break;
+					case 'administrator':
+						header("location:index.php?content=admin_homepage");
+						break;
+					case 'root':
+						header("location:index.php?content=root_homepage");
+						break;
+					case 'developer':
+						header("location:index.php?content=developer_homepage");
+						break;
+					case 'photographer':
+						header("location:index.php?content=photographer_homepage");
+						break;			
+				}						
+			}
+			else 
 			{
-				case 'customer':
-					header("location:index.php?content=customer_homepage");
-					break;
-				case 'administrator':
-					header("location:index.php?content=admin_homepage");
-					break;
-				case 'root':
-					header("location:index.php?content=root_homepage");
-					break;
-				case 'developer':
-					header("location:index.php?content=developer_homepage");
-					break;
-				case 'photographer':
-					header("location:index.php?content=photographer_homepage");
-					break;			
+				echo "U account is niet geactiveerd. Check uw inbox of spambox
+					  en activeer alsnog uw account";
+				header("refresh:4; url=index.php?content=login");
 			}		
 		}
 		else
