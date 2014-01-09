@@ -143,5 +143,49 @@
 				return false;
 			}			
 		}
+		
+		public static function check_if_emailaddress_exists($email)
+		{
+			global $database;
+							
+			$query = "SELECT `email`
+					  FROM	 `login`
+					  WHERE	 `email` = '".$email."'";
+					  
+			$result = $database->fire_query($query);
+			if ( mysql_num_rows($result) > 0)
+			{
+				return true;				
+			}
+			else
+			{
+				return false;
+			}			
+		}
+		
+		public static function insert_into_loginClass($email)
+		{
+			global $database;
+			
+			
+			
+			$query = "INSERT INTO `login` (`login_id`,
+										   `email`,
+										   `password`,
+										   `userrole`,
+										   `isactivated`,
+										   `registerdate`)
+					  VALUES			  (Null,
+					  					   '".$email."',
+					  					   '',
+					  					   '',
+					  					   '',
+					  					   
+					  
+					  
+					  )";
+			
+			
+		}
 }
 ?>

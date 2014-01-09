@@ -33,8 +33,8 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="text" name="street" />
-				<input type="number" min="0" max="18926" name="house_number" />
+				<input type="text" name="address" />
+				<input type="number" min="0" max="18926" name="addressnumber" />
 			</td>
 		</tr>
 		<tr>
@@ -50,35 +50,9 @@
 		<tr>
 		<tr>
 			<td>
-				<input type="text" name="zip_code"  maxlength="6" />
+				<input type="text" name="zipcode"  maxlength="6" />
 			</td>
-		</tr>
-		<tr>
-			<td>Geboortedatum: </td>
-		<tr>
-		<tr>
-			<td>
-				<input type="date" name="birthday" min="1883-01-01" />
-			</td>
-		</tr>
-		<tr>
-			<td>Geslacht: </td>
-		<tr>
-		<tr>
-			<td>
-				<input type="radio" name="sex" value="male" required/>Man<br>
-				<input type="radio" name="sex" value="female" required/>vrouw
-			</td>
-		</tr>
-		<tr>
-			<td>Burgerlijke staat: </td>
-		<tr>
-		<tr>
-			<td>
-				<input type="radio" name="marital_status" value="married" required/>getrouwd<br>
-				<input type="radio" name="marital_status" value="married" required/>niet getrouwd
-			</td>
-		</tr>
+		</tr>		
 		<tr>
 			<td>emailadres: </td>
 		<tr>
@@ -88,42 +62,22 @@
 			</td>
 		</tr>
 		<tr>
-			<td>password: </td>
+			<td>telefoonnummer: </td>
 		<tr>
 		<tr>
 			<td>
-				<input type="password" name="password" required />
+				<input type="text" name="phonenumber" required />
 			</td>
 		</tr>
 		<tr>
-			<td>Game genre: </td>
+			<td>mobiel: </td>
 		<tr>
 		<tr>
 			<td>
-				<select name="game_type" >
-					<option value="no_choice" selected>---</option>
-					<option value="fps">fps</option>
-					<option value="strategy">strategy</option>
-					<option value="adventure">adventure</option>
-					<option value="rpg">rpg</option>
-					<option value="horror">horror</option>
-					<option value="retro">retro</option>
-					<option value="sport">sport</option>
-					<option value="puzzle">puzzle</option>
-					<option value="party">party</option>
-					<option value="casual">casual</option>
-					<option value="education">education</option>
-				</select>
+				<input type="text" name="mobilephonenumber" required />
 			</td>
 		</tr>
-		<tr>
-			<td>Favoriete game: </td>
-		<tr>
-		<tr>
-			<td>
-				<input type="text" name="favo_game" />
-			</td>
-		</tr>
+		
 		<tr>
 			<td>
 				<input type="submit" name="submit" value="verstuur" />
