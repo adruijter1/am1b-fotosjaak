@@ -167,8 +167,9 @@
 		{
 			global $database;
 			
-			
-			
+			$date = date("Y-m-d H:i:s");
+			$temp_password = MD5($email.$date);
+						
 			$query = "INSERT INTO `login` (`login_id`,
 										   `email`,
 										   `password`,
@@ -177,15 +178,12 @@
 										   `registerdate`)
 					  VALUES			  (Null,
 					  					   '".$email."',
-					  					   '',
-					  					   '',
-					  					   '',
-					  					   
-					  
-					  
-					  )";
-			
-			
+					  					   '".$temp_password."',
+					  					   'customer',
+					  					   'no',
+					  					   '".$date."')";
+		    //echo $query; exit();
+			$database->fire_query($query);			
 		}
 }
 ?>

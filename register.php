@@ -10,7 +10,7 @@
 	}
 	else 
 	{
-		
+		LoginClass::insert_into_loginClass($_POST['email']);
 		
 		//Een sql opdracht die een record naar de tabel users wegschrijft
 		$sql = "INSERT INTO `users` (`id` ,
