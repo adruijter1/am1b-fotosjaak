@@ -183,7 +183,32 @@
 					  					   'no',
 					  					   '".$date."')";
 		    //echo $query; exit();
-			$database->fire_query($query);			
+			$database->fire_query($query);
+			
+			$id = mysql_insert_id();	
+			
+			$query = "INSERT INTO `user` (`user_id`,
+										  `firstname`,
+										  `infix`,
+										  `surname`,
+										  `address`,
+										  `addressnumber`,
+										  `city`,
+										  `zipcode`,
+										  `country`,
+										  `phonenumber`,
+										  `mobilephonenumber`)
+					  VALUES			 ('".$id."',
+					  					  '".$_POST['firstname']."',
+					  					  '".$_POST['infix']."',
+					  					  '".$_POST['surname']."',
+					  					  '".$_POST['address']."',
+					  					  '".$_POST['addressnumber']."',
+					  					  '".$_POST['city']."',
+										  '".$_POST['zipcode']."',
+										  '".$_POST['country']."',
+										  '".$_POST['phonenumber']."'
+										  '".$_POST['mobilephonenumber']."')";		
 		}
 }
 ?>
