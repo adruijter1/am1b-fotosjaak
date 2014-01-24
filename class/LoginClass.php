@@ -254,5 +254,15 @@
 			
 			mail($to, $subject, $message, $headers);			
 		}
+
+		public static function update_password_in_login($email, $password)
+		{	
+			global $database;			
+			$query = "UPDATE `login`
+					  SET `password` = '".$password."',
+					  	  `isactivated` = 'yes'
+					  WHERE `email` = '".$email."'";
+			$database->fire_query($query);
+		}
 }
 ?>
